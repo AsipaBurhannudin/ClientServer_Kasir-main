@@ -11,8 +11,6 @@ using System.Security.Claims;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class UsersController : GeneralController<IUsers, Users, int>
     {
         private readonly ITokenService _tokenService;
