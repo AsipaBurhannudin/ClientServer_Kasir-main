@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 
@@ -15,16 +16,12 @@ namespace API.Models
         public string name { get; set; }
         [Column("position", TypeName = "varchar(50)")]
         public string position { get; set; }
-        [Column("gender")]
-        public Gender gender { get; set; }
+        [Column("gender", TypeName = "char(1)")]
+        public string gender { get; set; }
+   
         [Column("address", TypeName = "varchar(255)")]
         public string address { get; set; }
         [Column("phone_number", TypeName = "varchar(50)")]
         public string phone_number { get; set; }
     }
-}
-public enum Gender
-{
-    Male,
-    Female
 }

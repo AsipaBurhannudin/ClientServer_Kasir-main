@@ -6,25 +6,14 @@ namespace API.ViewModels
 {
     public class RegisterVM
     {
-        public string NIK { get; set; }
+        public string UserCode { get; set; }
         
-        public string FirstName { get; set; }
-        
-        public string? LastName { get; set; }
-        
-        public DateTime BirthDate { get; set; }
-        
-        public Gender Gender { get; set; }
-        
-        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Position { get; set; }
+        public string Gender { get; set; }
+        public string Address { get; set; }
         public string PhoneNumber { get; set; }
-        public string Major { get; set; }
-        
-        public string Degree { get; set; }
-        
-        public string Gpa { get; set; }
-        public string UniversitieName { get; set; }
-        public string password { get; set; }
 
     }
 }

@@ -55,5 +55,28 @@ namespace API.Controllers
             });
         }
 
+        [AllowAnonymous]
+        [HttpPost("Register")]
+        public ActionResult Register(RegisterVM registerVM)
+        {
+            var register = _repository.Register(registerVM);
+            if (register > 0)
+            {
+                return Ok(new ResponseDataVM<string>
+                {
+                    Code = StatusCodes.Status200OK,
+                    Status = HttpStatusCode.OK.ToString(),
+                    Message = "Insert Success"
+                });
+            }
+
+            return BadRequest(new ResponseErrorsVM<string>
+            {
+                Code = StatusCodes.Status500InternalServerError,
+                Status = HttpStatusCode.InternalServerError.ToString(),
+                Errors = "Insert Failed / Lost Connection"
+            });
+        }
     }
+
 }
