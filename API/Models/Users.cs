@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace API.Models
 {
-    [Table("customer")]
+    [Table("users")]
     public class Users
     {
         [Key, Column("user_code", TypeName = "char(5)")]
