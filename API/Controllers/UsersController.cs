@@ -6,23 +6,26 @@ using API.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 
 namespace API.Controllers
 {
-    public class UsersController : GeneralController<IUsers, Users, int>
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UsersController : GeneralController<IUsers, Users, string>
     {
         private readonly ITokenService _tokenService;
         private readonly ICustomer _customerRepository;
 
         public UsersController(
-            IUsers users,
+            IUsers usersRepository,
             ITokenService tokenService,
-            ICustomer customerRepository) : base(users) 
+            ICustomer customerRepository) : base(usersRepository)
         {
-        _tokenService = tokenService;
-        _customerRepository = customerRepository;
+            _tokenService = tokenService;
+            _customerRepository = customerRepository;
         }
 
         [AllowAnonymous]
@@ -41,8 +44,9 @@ namespace API.Controllers
             }
 
             var claims = new List<Claim>() {
-            new Claim("UserCode", loginVM.UserCode),
-        };
+                new Claim("UserCode", loginVM.UserCode),
+                new Claim("Password", loginVM.Password),
+            };
 
             var token = _tokenService.GenerateToken(claims);
 
@@ -78,5 +82,4 @@ namespace API.Controllers
             });
         }
     }
-
 }

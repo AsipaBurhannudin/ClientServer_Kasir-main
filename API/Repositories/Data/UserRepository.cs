@@ -6,7 +6,7 @@ using API.ViewModels;
 
 namespace API.Repositories.Data
 {
-    public class UsersRepository : GeneralRepository<Users, int, MyContext>, IUsers
+    public class UsersRepository : GeneralRepository<Users, string, MyContext>, IUsers
     {
         public UsersRepository(MyContext context) : base(context) { }
 
@@ -18,7 +18,7 @@ namespace API.Repositories.Data
             var users = new Users
             {
                 user_code = registerVM.UserCode,
-                password = registerVM.Password,
+                password = Hashing.HashPassword(registerVM.Password),
                 name = registerVM.Name,
                 position = registerVM.Position,
                 gender = registerVM.Gender,
@@ -35,21 +35,13 @@ namespace API.Repositories.Data
         public bool Login(LoginVM loginVm)
         {
 
-            var getUserAccount = _context.Userss.Join(_context.Userss,
-                u => u.user_code,
-                p => p.password,
-                (u, p) => new
-                {
-                    UserCode = u.user_code,
-                    Password = p.password,
-                }).FirstOrDefault(u => u.UserCode == loginVm.UserCode);
+            var getUserAccount = _context.Userss.FirstOrDefault(u => u.user_code == loginVm.UserCode);
 
             if (getUserAccount == null)
-            {
-                return false;
-            }
 
-            return Hashing.ValidatePassword(loginVm.Password, getUserAccount.Password);
+                return false;
+
+            return Hashing.ValidatePassword(loginVm.Password, getUserAccount.password);
         }
     }
 }

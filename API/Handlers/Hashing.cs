@@ -4,7 +4,7 @@
     {
         private static string GetRandomSalt()
         {
-            return BCrypt.Net.BCrypt.GenerateSalt(12);
+            return BCrypt.Net.BCrypt.GenerateSalt(4);
         }
         public static string HashPassword(string password)
         {
