@@ -31,7 +31,7 @@ namespace Client.Controllers
                 // Cek jika usercode mengandung huruf "ADM"
                 if (login.UserCode.Contains("ADM"))
                 {
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index", "Manager");
                 }
                 else
                 {

@@ -2,10 +2,14 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_ManagerLayout";
 }
 
-<h1>History</h1>
+<h1>Index</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -38,6 +42,11 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.purchase_price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.purchase_code }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.purchase_code }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.purchase_code })
             </td>
         </tr>
 }

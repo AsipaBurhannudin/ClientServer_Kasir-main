@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Client.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "ManagerOnly")]
     public class PurchaseDetailsController : Controller
     {
             private readonly PurchaseDetailsRepository repository;
@@ -14,6 +14,7 @@ namespace Client.Controllers
             {
                 this.repository = repository;
             }
+
 
             public async Task<IActionResult> Index()
             {
@@ -82,14 +83,13 @@ namespace Client.Controllers
             {
                 var result = await repository.Get(id);
                 var purchaseDetails = new PurchaseDetails();
-                if (result.Data?.item_code is null)
+                if (result.Data?.purchase_code is null)
                 {
                     return View(purchaseDetails);
                 }
                 else
                 {
-                    purchaseDetails.purchase_code = result.Data.purchase_code;
-                    purchaseDetails.item_code = result.Data.item_code;
+                purchaseDetails.purchase_code = result.Data.purchase_code;
                 }
 
                 return View(purchaseDetails);
@@ -99,9 +99,9 @@ namespace Client.Controllers
             public async Task<IActionResult> Delete(string id)
             {
                 var result = await repository.Get(id);
-                var purchaseDetails = result?.Data;
+                var item = result?.Data;
 
-                return View(purchaseDetails);
+                return View(item);
             }
 
             [HttpPost]
@@ -119,8 +119,8 @@ namespace Client.Controllers
                     ModelState.AddModelError(string.Empty, result.Message);
                 }
 
-                var purchaseDetails = await repository.Get(id);
-                return View("Delete", purchaseDetails?.Data);
+                var item = await repository.Get(id);
+                return View("Delete", item?.Data);
             }
 
         }

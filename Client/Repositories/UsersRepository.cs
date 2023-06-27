@@ -67,6 +67,29 @@ namespace Client.Repositories
             return entity;
         }
 
+        public async Task<ResponseDataVM<Users>> Put(Users users)
+        {
+            ResponseDataVM<Users> entityVM = null;
+            StringContent content = new StringContent(JsonConvert.SerializeObject(users), Encoding.UTF8, "application/json");
+            using (var response = await httpClient.PutAsync(request, content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entityVM = JsonConvert.DeserializeObject<ResponseDataVM<Users>>(apiResponse);
+            }
+            return entityVM;
+        }
+
+        public async Task<ResponseDataVM<Users>> Delete(string id)
+        {
+            ResponseDataVM<Users> entityVM = null;
+
+            using (var response = await httpClient.DeleteAsync(request + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entityVM = JsonConvert.DeserializeObject<ResponseDataVM<Users>>(apiResponse);
+            }
+            return entityVM;
+        }
 
     }
 }
