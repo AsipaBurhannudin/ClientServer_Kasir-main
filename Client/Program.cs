@@ -12,6 +12,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<ItemRepository>();
+builder.Services.AddScoped<PurchaseDetailsRepository>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
