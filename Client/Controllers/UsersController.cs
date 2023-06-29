@@ -1,10 +1,12 @@
 ﻿using API.Models;
 using API.ViewModels;
 using Client.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Client.Controllers
 {
+    [AllowAnonymous]
     public class UsersController : Controller
     {
         private readonly UsersRepository repository;
@@ -45,7 +47,7 @@ namespace Client.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return Redirect("/Users/Login");
+            return Redirect("Users/Login");
         }
 
         public async Task<IActionResult> Index()

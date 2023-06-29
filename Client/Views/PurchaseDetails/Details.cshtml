@@ -38,6 +38,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.purchase_code }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.purchase_code }, new { @class = "btn btn-warning" })
+    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
 </div>
