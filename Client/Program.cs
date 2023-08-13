@@ -16,6 +16,7 @@ builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connect
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<CustomerRepository>();
 builder.Services.AddScoped<UsersRepository>();
 builder.Services.AddScoped<ItemRepository>();
 builder.Services.AddScoped<PurchaseDetailsRepository>();

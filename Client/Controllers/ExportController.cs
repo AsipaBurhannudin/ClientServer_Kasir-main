@@ -35,7 +35,7 @@ namespace Client.Controllers
                 {
                     wb.SaveAs(stream);
                     stream.Seek(0, SeekOrigin.Begin);
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Employee.xlsx");
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "PurchaseDet.xlsx");
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace Client.Controllers
                 {
                     wb.SaveAs(stream);
                     stream.Seek(0, SeekOrigin.Begin);
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "PurchaseD.xlsx");
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "PurchaseDet.xlsx");
                 }
             }
         }
